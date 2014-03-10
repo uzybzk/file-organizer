@@ -11,10 +11,18 @@ import (
 func main() {
     if len(os.Args) < 2 {
         fmt.Println("Usage: file-organizer <directory>")
+        fmt.Println("       file-organizer --help")
+        return
+    }
+    
+    if os.Args[1] == "--help" || os.Args[1] == "-h" {
+        showHelp()
         return
     }
     
     directory := os.Args[1]
+    
+    fmt.Printf("Organizing files in: %s\n", directory)
     
     err := organizeFiles(directory)
     if err != nil {
@@ -23,6 +31,17 @@ func main() {
     }
     
     fmt.Printf("Files organized successfully in %s\n", directory)
+}
+
+func showHelp() {
+    fmt.Println("File Organizer - Organize files by extension")
+    fmt.Println()
+    fmt.Println("Usage:")
+    fmt.Println("  file-organizer <directory>")
+    fmt.Println()
+    fmt.Println("Examples:")
+    fmt.Println("  file-organizer ~/Downloads")
+    fmt.Println("  file-organizer /path/to/messy/folder")
 }
 
 func organizeFiles(dir string) error {
