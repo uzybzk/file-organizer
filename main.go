@@ -24,7 +24,16 @@ func main() {
     
     fmt.Printf("Organizing files in: %s\n", directory)
     
-    err := organizeFiles(directory)
+    // Show stats before organizing
+    stats, err := collectStats(directory)
+    if err != nil {
+        fmt.Printf("Error collecting stats: %v\n", err)
+        return
+    }
+    printStats(stats)
+    fmt.Println()
+    
+    err = organizeFiles(directory)
     if err != nil {
         fmt.Printf("Error organizing files: %v\n", err)
         return
